@@ -35,18 +35,20 @@ class AdminController extends Controller
     // function getImage(){
     //     return view('admin.pages.image');
     // }
-    function getRegister(){
-        return view('admin.pages.register');
-    }
-    function postRegister(Request $req){
-        $user = new User;
-        $user->username = $req->username;
-        $user->fullname = $req->fullname;
-        $user->email = $req->email;
-        $user->password =Hash::make($req->password);
-        $user->save();
-        return redirect()->route('login')->with('success','Đăng ký thành công!');
-    }
+    // function getRegister(){
+    //     return view('admin.pages.register');
+    // }
+    // function postRegister(Request $req){
+    //     $user = new User;
+    //     $user->username = $req->username;
+    //     $user->fullname = $req->fullname;
+    //     $user->email = $req->email;
+    //     $user->password =Hash::make($req->password);
+    //     $user->save();
+    //     return redirect()->route('login')->with('success','Đăng ký thành công!');
+    // }
+
+    /** User*/
     function getEditUser(){
         $user = Auth::user();
         //dd($user);
@@ -66,6 +68,7 @@ class AdminController extends Controller
         $user->save();
         return redirect()->back()->with('message', 'Cập nhật thành công!');
     }
+    /*TinTuc*/
     function getTinTuc(){
         $tintuc = TinTuc::all();
         return view('admin.pages.tintuc', compact('tintuc', $tintuc));
@@ -115,6 +118,8 @@ class AdminController extends Controller
         $tintuc->delete();
         return redirect()->back()->with('success', 'Xóa dữ liệu thành công!');
     }
+
+    /** Image*/
     function getImage(){
         $image = Image::all();
         return view('admin.pages.image', compact('image', $image));
@@ -131,14 +136,30 @@ class AdminController extends Controller
         $hinhanh->save();
         return redirect()->back()->with('success', 'Thêm hình ảnh thành công!');
     }
+    function getEditImage($id){
+        $image = Image::where('id', $id)->first();
+        return view('admin.pages.edit_image', compact('image',$image));
+    }
+    function postEditImage(Request $req){
+        $hinhanh = Image::findOrFail($req->id);
+        if($hinhanh){
+            if($req->hasFile('image')){
+                $image = $req->file('image');
+                $name = time().$image->getClientOriginalName();
+                $image->move('upload/hinhanh', $name);
+                $hinhanh->hinh = $name;
+            }
+        }
+        $hinhanh->save();
+        return redirect()->back()->with('success', 'Cập nhật thành công!');
+    }
     function getDeleteHinhAnh($id){
         $tintuc = Image::findOrFail($id);
         $tintuc->delete();
         return redirect()->back()->with('success', 'Xóa dữ liệu thành công!');
     }
-    function postEditImage(Request $req){
-        
-    }
+    /**Video */
+
     function getVideo(){
         $video = Video::all();
         return view('admin.pages.video', compact('video', $video));

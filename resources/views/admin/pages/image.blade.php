@@ -75,16 +75,17 @@
 								</td>
 								<td class="center">
 									
-									<a class="btn btn-info" href="#">
+									<a class="btn btn-info" href="{{route('editImage', $i->id)}}">
 										<i class="halflings-icon white edit"></i>  
 									</a>
 									<a class="btn btn-danger updateHinhAnh" href="#"data-toggle="modal" data-target="#deleteModalHinhAnh" data-id="{{$i->id}}">
 										<i class="halflings-icon white trash"></i> 
 									</a>
 								</td>
-							
-								
+	
 							</tr>
+															
+
                             @endforeach
 
 
@@ -94,6 +95,7 @@
 				</div><!--/span-->
 			
 			</div><!--/row-->
+
 	<div id="deleteModalHinhAnh" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">

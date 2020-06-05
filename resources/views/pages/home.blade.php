@@ -368,6 +368,7 @@
                     <div class="row work-items">
                         <!-- work item -->
                         @foreach($image as $img)
+                        @if($img->status==1)
                         <div class="col-md-3 col-sm-6 mix graphic">
                         <div class="item">
                                 <a href="upload/hinhanh/{{$img->hinh}}" class="work-popup">
@@ -378,6 +379,7 @@
                                 </a>
                             </div>
                         </div>
+                        @endif
                         @endforeach
                         <!-- work item -->
                         
