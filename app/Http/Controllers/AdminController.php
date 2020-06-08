@@ -150,6 +150,8 @@ class AdminController extends Controller
                 $hinhanh->hinh = $name;
             }
         }
+        $hinhanh->status = isset($req->status)&& $req->status=="on"?1:0;
+
         $hinhanh->save();
         return redirect()->back()->with('success', 'Cập nhật thành công!');
     }
