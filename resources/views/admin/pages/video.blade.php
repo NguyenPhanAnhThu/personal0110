@@ -63,7 +63,8 @@
                               @foreach($video as $i)
 							<tr>
 								<td>
-                                    {{$i->link}}
+								<iframe src="{{$i->link}}" title="W3Schools Free Online Web Tutorials"></iframe>		
+                                    
                                 </td>
 								
 								<td class="center">
